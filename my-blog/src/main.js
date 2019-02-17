@@ -14,7 +14,8 @@ new Vue({
   router,
   store,
   beforeCreate(){
-    store.commit('getMyInfo')
+    store.dispatch('getMyInfo'),
+    store.dispatch('getArticleMeta')
   },
   components: {
     app

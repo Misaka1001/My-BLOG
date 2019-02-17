@@ -5,7 +5,7 @@
     </section>
     <section class="info">
       <el-row>
-        <el-col>{{info.name}}</el-col>
+        <el-col>{{ info && info.name}}</el-col>
       </el-row>
       <el-row>
         <el-col :span="8">
@@ -50,7 +50,7 @@
         </el-col>
         <img src="/static/qq.jpg" alt class="qq" v-if="showQQCode">
         <el-col :span="8">
-          <el-tooltip class="item" effect="dark" :content="info.email" placement="bottom-end">
+          <el-tooltip class="item" effect="dark" :content="info && info.email" placement="bottom-end">
             <svg
               t="1550373668509"
               class="icon"
