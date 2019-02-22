@@ -66,7 +66,7 @@ export default {
   .logo {
     height: 100%;
     background-image: url(/static/logo.png);
-    background-size: 100% auto;
+    background-size: auto 100%;
     background-repeat: no-repeat;
     background-position: center;
   }
