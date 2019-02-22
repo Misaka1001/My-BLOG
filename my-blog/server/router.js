@@ -1,6 +1,6 @@
 const express = require('express');
-const router = express.Router();
 const api = require('./api');
+const router = express.Router();
 
 router.get('/getValue', (req, res, next) => {
   api.getValue(req, res, next);

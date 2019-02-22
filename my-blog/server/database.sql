@@ -37,6 +37,7 @@ INSERT INTO myinfo VALUES(
 CREATE TABLE article_meta(
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(32),
+    summary VARCHAR(100),
     date BIGINT,
     count INT(5),
     cover VARCHAR(32),
@@ -44,19 +45,24 @@ CREATE TABLE article_meta(
 );
 INSERT INTO article_meta VALUES(
     NULL,
-    '数据属性',
+    '作用域',
+    '编译原理
+传统编译语言中，程序的一段源码在执行前经历三个步骤，统称“编译”',
     123123123123,
     0,
     '/static/cover1.jpg',
-    '学习笔记'
+    '读书笔记'
 );
 INSERT INTO article_meta VALUES(
     NULL,
-    '数据属性',
+    '词法作用域',
+    '词法阶段
+词法化的过程会对源代码中的字符进行检查，如果是有状态的解析过程，还会赋予单词语义。
+词法作用域就是定义在词法阶段的作用域。',
     123123123123,
     0,
     '/static/cover1.jpg',
-    '随笔'
+    '读书笔记'
 );
 CREATE TABLE article(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -64,79 +70,76 @@ CREATE TABLE article(
 );
 INSERT INTO article VALUES(
     NULL,
-    '1、数据属性
-[[Configurable]] : 可配置性，表示能否使用delete删除属性从而重新定义属性
-[[Enumerable]] : 可枚举性，表示能否使用for-in循环遍历
-[[Writable]] : 可写，表示能否修改属性的值
-[[Value]] : 包含这个属性的数据值，读取属性值从这个位置读，写入时把新值保存在这个位置
+    '1.1编译原理
+传统编译语言中，程序的一段源码在执行前经历三个步骤，统称“编译”
+1、分词/词法分析(Tokenizing/Lexing)
+将字符串（对编程语言来说）分解成有意义的代码块（词法单元）
+2、解析/语法解析(parsing)
+将词法单元流（数组）转换成一个由元素逐级嵌套所组成的代表了程序语法结构的树（抽象语法树）（Abstract Synatax Tree, AST）
+variableDeclaration（变量声明）——Identifier（识别符/变量名）——AssignmentExpression（=/赋值符号）——NumeriacLiteral（值）
+3、代码生成
+将AST转换为可执行代码的过程称为代码生成(转换为一组机器指令)
+对于JavaScript来说，大部分编译发生在代码执行前的几微秒
 
-修改属性默认的特性：Object.defineProperty()   该方法接收三个参数：属性所在对象、属性的名字和一个描述符对象
-eg : Object.defineProperty(person,"name",{writable : false, value : "guo"});
+1.2理解作用域
+对 var a = 2； 进行处理
+引擎：从头到尾负责整个JavaScript程序的编译和执行过程
+编译器：负责语法分析及代码生成
+作用域：负责收集并维护由所有声明的标识符（变量）组成的一系列查询，并实施一套规则，确定当前执行的代码对这些标识符的访问权限(用于确定在何处以及如何查找变量（标识符）)
 
-configurable一旦设置为false，表示不能从对象删除属性，并且不能变回可配置的
+引擎认为var a = 2；有个声明，一个由编译器在编译时处理，另一个由引擎在运行时处理
 
-2、访问器属性
-[[Configurable]] : 可配置性，表示能否使用delete删除属性从而重新定义属性
-[[Enumerable]] : 可枚举性，表示能否使用for-in循环遍历
-[[Get]] : 读取属性调用的函数 
-[[Set]] : 写入属性调用的函数
+编译器的处理：
+遇到var a ，编译器询问作用域是否已经有一个该名称的变量存在于同一个作用域的集合中。如果是，忽略声明，继续进行编译；否则会要求作用域在当前作用域的集合中声明一个新的变量，并命名为a。
+接下来，编译器会为引擎生成运行时所需代码，用来处理赋值操作。引擎运行时首先询问作用域，是否已经有一个叫作a的变量，如果是，使用这个变量。
 
-同样，需要使用Object.defineProperty()定义访问器属性,使用该方法创建一个新的属性，
-不指定的情况下，Configurable，Enumerable，Writable默认为false
-Object.defineProperties()
-读取属性的特性   Object.getOwnPropertyDescriptor(obj , "name")
+赋值操作的目标是谁（LHS）试图找到变量的容器本身  参数赋值是LHS引用
+谁是赋值操作的源头（RHS）简单的查找某个变量的值  函数的执行时RHS引用
 
-创建对象
-1、工厂模式
-       function createPerson(name, age, job){
-           var o = new Object();
-           o.name = name;
-           o.age = age;
-           o.job = job;
-           o.sayName = function(){
-               alert(this.name);
-           };
-           return o;
-       }
-var person1 = createPerson("Greg", 27, "Doctor");
+1.3作用域嵌套
+作用域是根据名称查找变量的一套规则。
+一个块或函数嵌套在另一个块或函数中时，就发生了作用域的嵌套。因此，在当前作用域无法找到某个变量时，引擎就会在外层嵌套的作用域中继续查找，直到找到该变量，或抵达全局作用域
 
-2、构造函数模式
-        function Person(name, age, job){
-            this.name = name;
-            this.age = age;
-            this.job = job;
-            this.sayName = function(){
-                alert(this.name);
-            };
-        }
-        var person1 = new Person("Greg", 25, "Doctor");
-
-调用构造函数的步骤：
-1、创建一个新对象
-2、将构造函数的作用域赋给新对象
-3、执行构造函数的代码
-4、返回新对象
-
-就检测对象类型，instanceof 比 constructor更可靠一些
-isPrototyeOf()		Object.getPrototype()
-in	hasOwnProperty()
-        function hasPrototypeProperty(object, name){
-            return !object.hasOwnProperty(name)&&(name in object);
-        }
-
-Object.keys（）返回可枚举属性的字符串数组
-Object.getOwnPropertyNames（）可以获得所有实例属性，无论能否枚举'
+1.4异常
+RHS查询在所有嵌套的作用域中找不到所需变量，会抛出ReferenceError异常。
+LHS查询找不到目标变量时，在非严格模式下，全局作用域会创建一个具有该名称的变量。
+严格模式禁止自动或隐式地创建全局变量。
+RHS查询找到一个变量，但尝试对这个变量的值进行不合理操作，如对非函数值进行调用，或者引用null或undefined类型的值中的属性，会抛出TypeError。'
 );
 INSERT INTO article VALUES(
     NULL,
-    '1、数据属性
-[[Configurable]] : 可配置性，表示能否使用delete删除属性从而重新定义属性
-[[Enumerable]] : 可枚举性，表示能否使用for-in循环遍历
+    '2.1词法阶段
+词法化的过程会对源代码中的字符进行检查，如果是有状态的解析过程，还会赋予单词语义。
+词法作用域就是定义在词法阶段的作用域。
 
-        function hasPrototypeProperty(object, name){
-            return !object.hasOwnProperty(name)&&(name in object);
-        }
+全局变量会自动成为全局对象（比如浏览器中的window对象）的属性，因此可以不直接通过全局对象的词法名称，而是间接的通过全局对象属性的引用对其进行访问。
+widow.a
 
-Object.keys（）返回可枚举属性的字符串数组
-Object.getOwnPropertyNames（）可以获得所有实例属性，无论能否枚举'
+通过这种技术可以访问被同名变量遮蔽的全局变量。
+
+词法作用域只由函数被声明时所处的位置决定。
+无论函数在哪里被调用，也无论它如何被调用，它的词法作用域都只由函数被声明时所处的位置决定。
+2.2欺骗词法
+eval（）通常用来执行动态创建的代码
+可以在运行期修改书写期的词法作用域
+严格模式下：eval（）在运行时有自己的词法作用域，意味着其中的声明无法修改所在作用域。
+setTimeout和setInterval有相同的作用
+with（）根据传给它的对象凭空创建了一个全新的词法作用域。
+eval和with会导致引擎无法在编译时对作用域查找进行优化，因为引擎只能谨慎地认为这样的优化是无效的。
+
+JavaScript引擎会在编译阶段进行数项性能优化，其中有些优化依赖于能够根据代码的词法进行静态分析，并预先确定所有变量和函数的定义位置，才能在执行过程中快速找到标识符。一旦出现eval和with所有优化都没有意义，所以最简单的做法就是不做优化。'
+);
+CREATE TABLE msg_board(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user VARCHAR(16),
+    msg VARCHAR(1000),
+    date BIGINT,
+    email VARCHAR(16)
+);
+INSERT INTO msg_board VALUES(
+    NULL,
+    'test',
+    'testMessage',
+    123123123123,
+    'eugen0822@outlook.com'
 );

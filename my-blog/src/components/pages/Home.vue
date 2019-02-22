@@ -14,7 +14,9 @@
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>博主文章</span>
-            <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+            <router-link to="/article">
+              <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
+            </router-link>
           </div>
           <div
             v-for="(item,index) in articleMeta"
@@ -29,7 +31,7 @@
             <span>番剧更新</span>
             <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
           </div>
-          <div v-for="o in 4" :key="o" class="text item">{{'列表内容 ' + o }}</div>
+          <div v-for="o in 1" :key="o" class="text item">{{'列表内容 ' + o }}</div>
         </el-card>
       </el-col>
     </el-row>
