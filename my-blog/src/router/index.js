@@ -4,6 +4,7 @@ import Home from '../components/pages/Home.vue'
 import Article from '../components/pages/Article.vue'
 import MyInfo from '../components/pages/MyInfo.vue'
 import MsgBoard from '../components/pages/MsgBoard.vue'
+import ArticleDetails from '../components/pages/MsgBoard.vue'
 Vue.use(Router)
 
 export default new Router({
@@ -26,6 +27,10 @@ export default new Router({
       name: 'MyInfo',
       component: MyInfo
     }, {
+      path : '/ArticleDetails',
+      name : 'ArticleDetails',
+      component : ArticleDetails
+    },{
       path: '/msgboard',
       name: 'MsgBoard',
       component: MsgBoard

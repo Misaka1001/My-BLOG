@@ -31,7 +31,11 @@
             <span>番剧更新</span>
             <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
           </div>
-          <div v-for="o in 1" :key="o" class="text item">{{'列表内容 ' + o }}</div>
+          <div v-for="(item, index) in bangumi" :key="index" class="text item">
+            <p>{{ item.title }}</p> 
+            <span>{{item.index}} </span>
+            <span>{{item.time}}</span>
+            </div>
         </el-card>
       </el-col>
     </el-row>
@@ -40,6 +44,23 @@
 <script>
 import { mapState } from "vuex";
 export default {
+  created(){
+    this.getBangumi();
+  },
+  data(){
+    return {
+      bangumi:''
+    }
+  },
+  methods:{
+    getBangumi(){
+      this.$http.get('/api/getBangumi').then((res) => {
+        this.$data.bangumi = JSON.parse(res.data).filter(item => {
+          return item.isTody === 1
+        });
+      })
+    }
+  },
   computed: {
     ...mapState(["articleMeta"])
   }
@@ -59,7 +80,7 @@ export default {
       }
     }
     .box-card {
-      height: 350px;
+      height: 320px;
     }
   }
 }

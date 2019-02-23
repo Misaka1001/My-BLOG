@@ -26,7 +26,9 @@
           :span="8"
         >{{articleMeta && new Date(item.date).toLocaleDateString() }}</el-col>
         <el-col class="el-icon-view" :span="8">144浏览</el-col>
-        <el-col class="el-icon-document" :span="8">查看全文</el-col>
+        <el-col class="el-icon-document" :span="8">
+          <router-link to="ArticleDetails">查看全文</router-link>
+        </el-col>
       </el-row>
     </div>
   </el-card>

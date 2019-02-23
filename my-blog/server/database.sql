@@ -41,7 +41,8 @@ CREATE TABLE article_meta(
     date BIGINT,
     count INT(5),
     cover VARCHAR(32),
-    class VARCHAR(8)
+    class VARCHAR(8),
+    recommend BOOLEAN
 );
 INSERT INTO article_meta VALUES(
     NULL,
@@ -51,7 +52,8 @@ INSERT INTO article_meta VALUES(
     123123123123,
     0,
     '/static/cover1.jpg',
-    '读书笔记'
+    '读书笔记',
+    TRUE
 );
 INSERT INTO article_meta VALUES(
     NULL,
@@ -62,7 +64,8 @@ INSERT INTO article_meta VALUES(
     123123123123,
     0,
     '/static/cover1.jpg',
-    '读书笔记'
+    '读书笔记',
+    TRUE
 );
 CREATE TABLE article(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -133,13 +136,20 @@ CREATE TABLE msg_board(
     id INT PRIMARY KEY AUTO_INCREMENT,
     user VARCHAR(16),
     msg VARCHAR(1000),
-    date BIGINT,
+    date VARCHAR(20),
     email VARCHAR(16)
 );
 INSERT INTO msg_board VALUES(
     NULL,
     'test',
     'testMessage',
-    123123123123,
+    '2019年2月23日10:00',
+    'eugen0822@outlook.com'
+);
+INSERT INTO msg_board VALUES(
+    NULL,
+    'test',
+    'testMessage',
+    '2019年2月23日10:00',
     'eugen0822@outlook.com'
 );

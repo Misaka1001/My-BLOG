@@ -13,8 +13,7 @@
     <el-col :span="3" class="tag hidden-sm-and-down">
       <router-link to="msgboard">Msg-Board</router-link>
     </el-col>
-    <el-col :sm="4" :xs="4" :offset="5" class="hidden-md-and-up el-icon-menu icon"></el-col>
-    <el-col :span="1" :offset="0" class="hidden-sm-and-down icon git">
+    <el-col :span="3" class="hidden-sm-and-down icon git">
       <el-tooltip
         class="item"
         effect="dark"
@@ -38,9 +37,28 @@
         </svg>
       </el-tooltip>
     </el-col>
-    <el-col :span="1" class="el-icon-bell icon hidden-sm-and-down" title="message"></el-col>
-    <el-col :span="1" class="el-icon-setting icon hidden-sm-and-down" title="setting"></el-col>
-    <el-col :span="1" :offset="8" class="el-icon-more icon hidden-md-and-up"></el-col>
+    <el-col :sm="3" :xs="3" :offset="16" class="hidden-md-and-up">
+      <el-dropdown>
+        <el-col class="el-dropdown-link el-icon-menu el-icon-menu icon"></el-col>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>
+            <router-link to="home" class="link">Home</router-link>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <router-link to="article" class="link">Article</router-link>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <router-link to="myinfo" class="link">MyInfo</router-link>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <router-link to="msgboard" class="link">Msg-Board</router-link>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <span  @click="github" class="link">github</span>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+    </el-col>
   </el-row>
 </template>
 <script>
@@ -60,7 +78,7 @@ export default {
 };
 </script>
 
-<style lang='less'>
+<style  scoped lang='less'>
 .el-row {
   height: 100%;
   .logo {
@@ -83,15 +101,23 @@ export default {
     font-size: 30px;
     height: 100%;
     line-height: 60px;
+    color: #fff;
     cursor: pointer;
     &.git {
       display: flex;
       justify-content: center;
       align-items: center;
-      svg{
+      svg {
         outline: none;
       }
     }
   }
+  .el-col{
+    text-align: center;
+  }
+}
+.link{
+  display: inline-block;
+  width: 100%;
 }
 </style>

@@ -34,10 +34,15 @@ export default {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
+a{
+  text-decoration: none;
+  color: inherit;
+}
 .wrapper,
 html,
 body {
   height: 100%;
+  min-height: 700px;
 }
 .wrapper {
   background-image: url(/static/container_bg.jpg);
@@ -62,7 +67,7 @@ body {
     }
     .main {
       border-radius: 4px;
-      height: 100%;
+      height: 600px;
       background-color: rgba(255, 255, 255, 0.7);
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     }
