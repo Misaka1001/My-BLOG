@@ -13,6 +13,9 @@ router.get('/getMyInfo', (req, res, next) => {
 router.get('/getArticleMeta', (req, res, next) => {
   api.getArticleMeta(req, res, next);
 });
+router.get('/getArticle', (req, res, next) => {
+  api.getArticle(req, res, next);
+});
 router.get('/getRecommend', (req, res, next) => {
   api.getRecommend(req, res, next);
 });

@@ -17,7 +17,7 @@
         <el-col :span="17" :xs="24" :offset="1">
           <el-tag>{{articleMeta && item.class}}</el-tag>
           <span>{{articleMeta && item.title}}</span>
-          <p>摘要 ：{{articleMeta && item.summary}} </p>
+          <p>摘要 ：{{articleMeta && item.summary}}</p>
         </el-col>
       </el-row>
       <el-row class="bottom">
@@ -27,7 +27,7 @@
         >{{articleMeta && new Date(item.date).toLocaleDateString() }}</el-col>
         <el-col class="el-icon-view" :span="8">144浏览</el-col>
         <el-col class="el-icon-document" :span="8">
-          <router-link to="ArticleDetails">查看全文</router-link>
+          <router-link :to="{name : 'articleDetails',params:{ index : index, id : item.id }}">查看全文</router-link>
         </el-col>
       </el-row>
     </div>
@@ -43,7 +43,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["articleMeta"])
+    ...mapState(["articleMeta", "article"])
   }
 };
 </script>

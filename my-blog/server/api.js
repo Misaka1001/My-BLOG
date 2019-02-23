@@ -36,6 +36,12 @@ module.exports = {
     const sql = 'SELECT * FROM article_meta';
     getValue(sql, req, res)
   },
+  //获取具体文章内容
+  getArticle(req, res) {
+    const id = req.query.id;
+    const sql = `SELECT * FROM article WHERE id = ${id}`;
+    getValue(sql, req, res)
+  },
   //获取留言板信息
   getMsgBoard(req, res) {
     const sql = "SELECT * FROM msg_board";
@@ -51,7 +57,6 @@ module.exports = {
       '${queryMsg.date}',
       '${queryMsg.email}'
     )`;
-    console.log(sql)
     setValue(sql, req, res)
   },
   //获取博主推荐信息
@@ -60,11 +65,11 @@ module.exports = {
     getValue(sql, req, res)
   },
   //获取番剧更新
-  getBangumi(req,res){
-    fs.readFile('../static/test.txt','utf-8',function(err,data){
-      if(err){
+  getBangumi(req, res) {
+    fs.readFile('../static/test.txt', 'utf-8', function (err, data) {
+      if (err) {
         console.log(err)
-      }else{
+      } else {
         res.json(data)
       }
     })

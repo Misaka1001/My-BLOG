@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
     state: {
         info : null,
-        articleMeta : null
+        articleMeta : null,
+        article : ''
     },
     mutations: {
         initInfo(state, data){

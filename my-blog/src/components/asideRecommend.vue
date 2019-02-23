@@ -3,7 +3,11 @@
     <div slot="header" class="clearfix">
       <span>博主推荐</span>
     </div>
-    <div v-for="(item, index) in recommend" :key="index" class="text item">{{ item.title }}</div>
+    <div v-for="(item, index) in recommend" :key="index" class="text item">
+      <router-link
+        :to="{name : 'articleDetails',params:{ index : index, id : item.id}}"
+      >{{ item.title }}</router-link>
+    </div>
   </el-card>
 </template>
 <script>

@@ -4,7 +4,13 @@
       <el-col :span="20" :offset="2">
         <el-carousel :interval="4000" type="card" height="200px">
           <el-carousel-item v-for="(item,index) in articleMeta" :key="index">
-            <img :src="articleMeta && item.cover" alt>
+            <router-link
+              class="cover"
+              :to="{name : 'articleDetails',params:{ index : index, id : item.id}}"
+            >
+              <el-tag type="danger">{{item.title}}</el-tag>
+              <img :src="articleMeta && item.cover" alt>
+            </router-link>
           </el-carousel-item>
         </el-carousel>
       </el-col>
@@ -18,24 +24,23 @@
               <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
             </router-link>
           </div>
-          <div
-            v-for="(item,index) in articleMeta"
-            :key="index"
-            class="text item"
-          >{{ articleMeta && item.title }}</div>
+          <div v-for="(item,index) in articleMeta" :key="index" class="text item">
+            <router-link
+              :to="{name : 'articleDetails',params:{ index : index, id : item.id}}"
+            >{{ articleMeta && item.title }}</router-link>
+          </div>
         </el-card>
       </el-col>
       <el-col :span="8" :offset="1">
         <el-card class="box-card">
           <div slot="header" class="clearfix">
             <span>番剧更新</span>
-            <el-button style="float: right; padding: 3px 0" type="text">更多</el-button>
           </div>
           <div v-for="(item, index) in bangumi" :key="index" class="text item">
-            <p>{{ item.title }}</p> 
-            <span>{{item.index}} </span>
+            <p>{{ item.title }}</p>
+            <span>{{item.index}}</span>
             <span>{{item.time}}</span>
-            </div>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -44,21 +49,21 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  created(){
+  created() {
     this.getBangumi();
   },
-  data(){
+  data() {
     return {
-      bangumi:''
-    }
+      bangumi: ""
+    };
   },
-  methods:{
-    getBangumi(){
-      this.$http.get('/api/getBangumi').then((res) => {
+  methods: {
+    getBangumi() {
+      this.$http.get("/api/getBangumi").then(res => {
         this.$data.bangumi = JSON.parse(res.data).filter(item => {
-          return item.isTody === 1
+          return item.isTody === 1;
         });
-      })
+      });
     }
   },
   computed: {
@@ -74,13 +79,27 @@ export default {
     margin: 20px;
     &.top-article {
       .el-carousel {
-        img {
-          width: 100%;
+        .cover {
+          .el-tag {
+            position: absolute;
+            text-align: center;
+            right: 0;
+            top: 0;
+            font-size: 20px;
+          }
+          img {
+            width: 100%;
+            height: 100%;
+          }
         }
       }
     }
     .box-card {
       height: 320px;
+      .item {
+        font-size: 14px;
+        margin-bottom: 10px;
+      }
     }
   }
 }

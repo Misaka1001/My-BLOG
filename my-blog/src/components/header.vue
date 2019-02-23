@@ -2,16 +2,16 @@
   <el-row>
     <el-col :lg="4" :md="4" :sm="5" :xs="5" class="logo"></el-col>
     <el-col :lg="3" :md="3" :sm="3" :xs="3" :offset="5" class="tag hidden-sm-and-down">
-      <router-link to="home">Home</router-link>
+      <router-link :to="{name : 'home'}">Home</router-link>
     </el-col>
     <el-col :span="3" class="tag hidden-sm-and-down">
-      <router-link to="article">Article</router-link>
+      <router-link :to="{name : 'article'}">Article</router-link>
     </el-col>
     <el-col :span="3" class="tag hidden-sm-and-down">
-      <router-link to="myinfo">MyInfo</router-link>
+      <router-link :to="{name : 'myInfo'}">MyInfo</router-link>
     </el-col>
     <el-col :span="3" class="tag hidden-sm-and-down">
-      <router-link to="msgboard">Msg-Board</router-link>
+      <router-link :to="{name : 'msgBoard'}">Msg-Board</router-link>
     </el-col>
     <el-col :span="3" class="hidden-sm-and-down icon git">
       <el-tooltip

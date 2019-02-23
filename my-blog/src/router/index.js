@@ -4,36 +4,39 @@ import Home from '../components/pages/Home.vue'
 import Article from '../components/pages/Article.vue'
 import MyInfo from '../components/pages/MyInfo.vue'
 import MsgBoard from '../components/pages/MsgBoard.vue'
-import ArticleDetails from '../components/pages/MsgBoard.vue'
+import ArticleDetails from '../components/pages/ArticleDetails.vue'
 Vue.use(Router)
 
 export default new Router({
+  mode : 'history',
   routes: [
     {
       path: '/',
-      name: 'Home',
       component: Home
     },
     {
+      name : 'home',
       path: '/home',
-      name: 'Home',
       component: Home
     }, {
+      name : 'article',
       path: '/article',
-      name: 'Article',
       component: Article
     }, {
+      name : 'myInfo',
       path: '/myinfo',
-      name: 'MyInfo',
       component: MyInfo
     }, {
-      path : '/ArticleDetails',
-      name : 'ArticleDetails',
+      name : 'articleDetails',
+      path : '/articledetails/:id?',
       component : ArticleDetails
     },{
+      name : 'msgBoard',
       path: '/msgboard',
-      name: 'MsgBoard',
       component: MsgBoard
+    },{
+      path : '*',
+      redirect : '/home'
     }
   ]
 })
