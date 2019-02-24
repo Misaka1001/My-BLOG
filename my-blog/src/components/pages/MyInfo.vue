@@ -1,82 +1,61 @@
 <template>
-  <div class="myinfo-wrapper">
+  <el-card class="box-card">
     <header>
-      <h1>ABOUT ME</h1>
+      <h1>About Me</h1>
     </header>
     <section>
-      <el-row>
-        <el-col :span="8">
-          <span class="el-icon-tickets"></span>
-          <div>前端开发</div>
-        </el-col>
-        <el-col :span="8">
-          <span class="el-icon-message"></span>
-          <div>{{info && info.email}}</div>
-        </el-col>
-        <el-col :span="8">
-          <span class="el-icon-mobile-phone"></span>
-          <div>{{info && info.tel}}</div>
-        </el-col>
-      </el-row>
+      <el-card>
+        <el-row v-for="(value, key) in myInfo" :key="key">
+          <el-col :span="2" :xs="5" :offset="1">{{key}}</el-col>
+          <el-col :span="16" :offset="1">{{value}}</el-col>
+        </el-row>
+      </el-card>
     </section>
-    <footer>
-        <h1>MY SKILL</h1>
-    </footer>
-  </div>
-
+  </el-card>
 </template>
 <script>
 import { mapState } from "vuex";
 export default {
-  computed: {
-    ...mapState(["info"])
+  created(){
+    this.initInfo();
+  },
+  data(){
+    return {
+      myInfo : null
+    }
+  },
+  methods:{
+    initInfo(){
+      const info = JSON.parse(sessionStorage.getItem('info'));
+      this.myInfo = {
+        姓名 : info.name,
+        手机 : info.tel,
+        邮箱 : info.email,
+        GitHub : info.github,
+        座右铭 : info.motto
+      }
+    }
   }
 };
 </script>
-
 <style lang="less" scoped>
-
-.myinfo-wrapper {
-    height: 100%;
+.box-card {
+  font-size: 14px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   header {
     text-align: center;
     line-height: 60px;
-    margin: 30px 0px;
+    margin: 15px 0px;
     h1 {
       font-size: 40px;
       color: #424242;
     }
   }
-  section {
-    height: 150px;
-    background-color: rgba(0, 0, 0, 0.1);
-    .el-row {
-      display: flex;
-      justify-content: center;
-      .el-col {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        span {
-          font-size: 30px;
-        }
-        div {
-          margin-top: 20px;
-        }
-      }
-    }
-  }
-  footer {
-    background-color: rgb(27, 188, 155);
-    flex-grow: 1;
-    display: flex;
-    justify-content: center;
-    h1{
-        color: #fff;
-        margin: 20px 0px;
+  section{
+    .el-row{
+      margin: 10px 0px;
     }
   }
 }

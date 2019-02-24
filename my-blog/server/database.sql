@@ -8,12 +8,6 @@ CREATE TABLE message_board(
     email VARCHAR(32),
     msg VARCHAR(1000)
 );
-INSERT INTO message_board VALUES(
-    NULL,
-    'gjq',
-    'eugen0822@outlook.com',
-    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur corrupti sint necessitatibus voluptate tempora enim odit animi fugiat tempore, deleniti numquam, velit asperiores unde. A molestiae odio accusamus sint labore.'
-);
 CREATE TABLE myinfo(
     id INT(1),
     name VARCHAR(16),
@@ -22,17 +16,8 @@ CREATE TABLE myinfo(
     github VARCHAR(32),
     qq INT(10),
     wx VARCHAR(18),
-    job VARCHAR(10)
-);
-INSERT INTO myinfo VALUES(
-    0,
-    '断章',
-    15704612073,
-    'eugen0822@outlook.com',
-    'https://github.com/Misaka1001',
-    529885876,
-    'Apophis__',
-    'web前端开发'
+    job VARCHAR(10),
+    motto VARCHAR(100)
 );
 CREATE TABLE article_meta(
     id INT PRIMARY KEY AUTO_INCREMENT,
@@ -43,6 +28,34 @@ CREATE TABLE article_meta(
     cover VARCHAR(32),
     class VARCHAR(8),
     recommend BOOLEAN
+);
+CREATE TABLE article(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    article VARCHAR(5000)
+);
+CREATE TABLE msg_board(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    user VARCHAR(16),
+    msg VARCHAR(1000),
+    date VARCHAR(20),
+    email VARCHAR(16)
+);
+INSERT INTO message_board VALUES(
+    NULL,
+    'gjq',
+    'eugen0822@outlook.com',
+    'Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur corrupti sint necessitatibus voluptate tempora enim odit animi fugiat tempore, deleniti numquam, velit asperiores unde. A molestiae odio accusamus sint labore.'
+);
+INSERT INTO myinfo VALUES(
+    0,
+    '郭佳琪',
+    15704612073,
+    'eugen0822@outlook.com',
+    'https://github.com/Misaka1001',
+    529885876,
+    'Apophis__',
+    'web前端开发',
+    '要抹去懊悔，终究只有继续不断努力'
 );
 INSERT INTO article_meta VALUES(
     NULL,
@@ -71,17 +84,12 @@ INSERT INTO article_meta VALUES(
     NULL,
     '作用域闭包',
     '当函数可以记住并访问所在的词法作用域的时候，就产生了闭包，即使函数是在当前词法作用域之外执行的。
-
 无论通过何种手段将内部函数传递到所在的词法作用域之外，它都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包',
     123123123123,
     0,
     '/static/cover3.jpg',
     '读书笔记',
     TRUE
-);
-CREATE TABLE article(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    article VARCHAR(5000)
 );
 INSERT INTO article VALUES(
     NULL,
@@ -96,24 +104,10 @@ INSERT INTO article VALUES(
     NULL,
     '<div style="width:100%; height:100%;" class="w-e-text" id="text-elem773882758774135"><div yne-bulb-block="heading" yne-bulb-level="2" id="2152-1543110201289"><div yne-bulb-block="paragraph"><div yne-bulb-block="paragraph"><br></div><div yne-bulb-block="paragraph">当函数可以记住并访问所在的词法作用域的时候，就产生了闭包，即使函数是在当前词法作用域之外执行的。</div><div yne-bulb-block="paragraph"><br></div><div yne-bulb-block="paragraph">无论通过何种手段将内部函数传递到所在的词法作用域之外，它都会持有对原始定义作用域的引用，无论在何处执行这个函数都会使用闭包</div><div yne-bulb-block="paragraph"><pre><code>function wait(message){<br>    setTimeout(function timer(){<br>        console.log(message)<br>    },1000)<br>}<br>var message = "Hello World"<br>wait(message)</code></pre></div><div yne-bulb-block="paragraph">timer拥有涵盖wait（...）作用域的闭包，同时持有对message的引用、</div><div yne-bulb-block="paragraph"><br></div><div yne-bulb-block="paragraph">本质上，无论何时何地，如果将（访问他们各自词法作用域的）函数当作第一级的值类型并导出传递，就可以看到闭包的应用。在定时器、事件监听器、Ajax请求、跨窗口通信、Web Workers或者任何其他的异步（或同步）的任务中，只要使用了回调函数，实际上就是在使用闭包。</div><div yne-bulb-block="code" id="5316-1548432717705"><pre><code>for(var i = 1;i &lt;= 5; i++){<br>    (function(i){<br>        setTimeout(function(){<br>            console.log(i);<br>        },i*1000)<br>    }(i));<br>}</code></pre></div><div yne-bulb-block="paragraph">模块模式必要条件：</div><div yne-bulb-block="paragraph">1、必须有外部的封闭函数，该函数至少被调用一次（每次调用都会创建一个新的模块实例）</div><div yne-bulb-block="paragraph">2、封闭函数必须返回至少一个内部函数，这样内部函数才能在私有作用域中形成闭包，并且可以访问或修改私有的状态。</div><div yne-bulb-block="paragraph"><br></div><div yne-bulb-block="paragraph">ES6  export   </div><div yne-bulb-block="paragraph">import [name] from "file"</div><div yne-bulb-block="paragraph">module [name] from "file"</div><div yne-bulb-block="paragraph"><br></div></div></div></div>'
 );
-CREATE TABLE msg_board(
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    user VARCHAR(16),
-    msg VARCHAR(1000),
-    date VARCHAR(20),
-    email VARCHAR(16)
-);
 INSERT INTO msg_board VALUES(
     NULL,
-    'test',
-    'testMessage',
-    '2019年2月23日10:00',
-    'eugen0822@outlook.com'
-);
-INSERT INTO msg_board VALUES(
-    NULL,
-    'test',
-    'testMessage',
+    '测试信息',
+    '测试信息',
     '2019年2月23日10:00',
     'eugen0822@outlook.com'
 );

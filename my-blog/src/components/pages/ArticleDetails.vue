@@ -1,10 +1,10 @@
 <template>
   <el-card class="box-card">
     <el-row>
-      <el-col :span="8" :offset="2">
+      <el-col :span="8">
         <img :src="article && article.cover" alt>
       </el-col>
-      <el-col :span="8" :offset="2">
+      <el-col :span="14" :offset="2">
         <p>
           <el-tag size="small">标题</el-tag>
           {{article.title}}
@@ -19,7 +19,7 @@
         </p>
         <p>
           <el-tag size="small">日期</el-tag>
-          {{article.date}}
+          2019年2月24日
         </p>
       </el-col>
     </el-row>
@@ -40,12 +40,19 @@ export default {
   },
   methods: {
     init() {
-      const id = this.$route.params.id;
-      const index = this.$route.params.index;
-      this.article = this.$store.state.articleMeta[index];
-      this.$http.get("/api/getArticle", { params: { id: id } }).then(res => {
-        this.articleDetails = res.data[0].article;
-      });
+      if (this.$store.state.articleMeta) {
+        const id = this.$route.params.id;
+        const index = this.$route.params.index;
+        this.article = this.$store.state.articleMeta[index];
+        this.$http.get("/api/getArticle", { params: { id: id } }).then(res => {
+          this.articleDetails = res.data[0].article;
+          sessionStorage.setItem('articleMeta',JSON.stringify(this.article))
+          sessionStorage.setItem('articleDetails',JSON.stringify(this.articleDetails))
+        });
+      }else{
+        this.articleDetails = JSON.parse(sessionStorage.getItem('articleDetails'))
+        this.article = JSON.parse(sessionStorage.getItem('articleMeta'))
+      }
     }
   },
   computed: {
@@ -61,6 +68,7 @@ export default {
 
 <style lang="less" scoped>
 .el-card {
+  font-size: 14px;
   overflow-y: auto;
   height: 100%;
   &::-webkit-scrollbar {
@@ -87,6 +95,7 @@ export default {
       }
       p {
         margin-bottom: 10px;
+        width: 100%;
         .el-tag {
           margin-right: 10px;
           width: 60px;

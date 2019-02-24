@@ -4,14 +4,15 @@
       <blog-header></blog-header>
     </el-header>
     <el-row class="content">
-      <el-col :span="5" :offset="2" class="aside hidden-sm-and-down">
+      <el-col :span="6" class="aside hidden-md-and-down">
         <aside-info></aside-info>
         <aside-recommend></aside-recommend>
       </el-col>
-      <el-col :lg="14" :md="14" :sm="22" :xl="22" :xs="22" :offset="1" class="main">
+      <el-col :lg="18" :span="24" class="main">
         <router-view></router-view>
       </el-col>
     </el-row>
+    <!-- <el-footer class="footer"></el-footer> -->
   </el-container>
 </template>
 <script>
@@ -38,13 +39,16 @@ a{
   text-decoration: none;
   color: inherit;
 }
-.wrapper,
-html,
-body {
-  height: 100%;
-  min-height: 700px;
+li{
+  list-style: none;
+}
+@media screen and (min-width:767px){
+  html,body,.wrapper{
+    height: 100%;
+  }
 }
 .wrapper {
+  min-height: 667px;
   background-image: url(/static/container_bg.jpg);
   background-size: cover;
   .header {
@@ -61,13 +65,16 @@ body {
   }
   .content {
     display: flex;
-    margin: 20px 0px;
+    margin: 20px 150px;
+    @media screen and(max-width : 800px) {
+      margin: 20px 5px;
+    }
     .aside {
       height: 100%;
+      margin-right: 30px;
     }
     .main {
       border-radius: 4px;
-      height: 600px;
       background-color: rgba(255, 255, 255, 0.7);
       box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
     }

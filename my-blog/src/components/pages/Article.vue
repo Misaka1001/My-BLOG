@@ -1,13 +1,14 @@
 <template>
   <el-card class="box-card">
     <div slot="header" class="clearfix el-row">
-      <el-col :span="6">文章列表</el-col>
+      <h3>文章列表</h3>
+      <!-- <el-col :span="6">文章列表</el-col>
       <el-col :span="12">
         <el-input v-model="input" placeholder="请输入内容"></el-input>
       </el-col>
       <el-col :span="6">
         <el-button style="float: right; padding: 3px 0" type="text">分类/排序</el-button>
-      </el-col>
+      </el-col> -->
     </div>
     <div v-for="(item,index) in articleMeta" :key="index" class="text item el-row">
       <el-row class="articleMeta">

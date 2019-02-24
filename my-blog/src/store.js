@@ -12,6 +12,7 @@ export default new Vuex.Store({
     mutations: {
         initInfo(state, data){
             state.info = data;
+            sessionStorage.setItem('info',JSON.stringify(data))
         },
         initArticleMeta(state,data){
             state.articleMeta = Array.from(data);

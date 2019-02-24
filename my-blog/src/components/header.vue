@@ -1,6 +1,8 @@
 <template>
   <el-row>
-    <el-col :lg="4" :md="4" :sm="5" :xs="5" class="logo"></el-col>
+    <el-col :lg="4" :md="4" :sm="5" :xs="5" class="logo">
+      <router-link :to="{name : 'home'}">BLOG</router-link>
+    </el-col>
     <el-col :lg="3" :md="3" :sm="3" :xs="3" :offset="5" class="tag hidden-sm-and-down">
       <router-link :to="{name : 'home'}">Home</router-link>
     </el-col>
@@ -42,19 +44,19 @@
         <el-col class="el-dropdown-link el-icon-menu el-icon-menu icon"></el-col>
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>
-            <router-link to="home" class="link">Home</router-link>
+            <router-link :to="{name : 'home'}" class="link">Home</router-link>
           </el-dropdown-item>
           <el-dropdown-item>
-            <router-link to="article" class="link">Article</router-link>
+            <router-link :to="{name : 'article'}" class="link">Article</router-link>
           </el-dropdown-item>
           <el-dropdown-item>
-            <router-link to="myinfo" class="link">MyInfo</router-link>
+            <router-link :to="{name : 'myInfo'}" class="link">MyInfo</router-link>
           </el-dropdown-item>
           <el-dropdown-item>
-            <router-link to="msgboard" class="link">Msg-Board</router-link>
+            <router-link :to="{name : 'msgBoard'}" class="link">Msg-Board</router-link>
           </el-dropdown-item>
           <el-dropdown-item>
-            <span  @click="github" class="link">github</span>
+            <span @click="github" class="link">github</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
@@ -83,10 +85,9 @@ export default {
   height: 100%;
   .logo {
     height: 100%;
-    background-image: url(/static/logo.png);
-    background-size: auto 100%;
-    background-repeat: no-repeat;
-    background-position: center;
+    line-height: 60px;
+    font-size: 30px;
+    font-weight: bolder;
   }
   .tag {
     line-height: 60px;
@@ -112,11 +113,11 @@ export default {
       }
     }
   }
-  .el-col{
+  .el-col {
     text-align: center;
   }
 }
-.link{
+.link {
   display: inline-block;
   width: 100%;
 }
