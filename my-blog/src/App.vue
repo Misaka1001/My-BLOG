@@ -66,6 +66,9 @@ li{
   .content {
     display: flex;
     margin: 20px 150px;
+    @media screen and(max-width : 1000px) {
+      margin: 20px 50px;
+    }
     @media screen and(max-width : 800px) {
       margin: 20px 5px;
     }
